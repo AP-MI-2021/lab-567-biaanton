@@ -1,4 +1,4 @@
-from Domain.obiect import creeaza_obiect, get_id
+from Domain.obiect2 import creeaza_obiect, get_id
 from Logic.crud import create, read, update, delete
 
 

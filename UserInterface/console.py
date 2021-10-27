@@ -1,4 +1,4 @@
-from Domain.obiect import get_str, get_nume, get_descriere, get_locatie, get_pret, creeaza_obiect
+from Domain.obiect2 import get_str, get_nume, get_descriere, get_locatie, get_pret, creeaza_obiect
 from Logic.crud import create, read, update, delete
 
 
