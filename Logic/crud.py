@@ -1,7 +1,7 @@
-from Domain.obiect2 import creeaza_obiect, get_id
+from Domain.obiect2 import creeaza_obiect, get_id, get_locatie
 
 
-def create(lst_obiecte,id_obiect: int, nume, descriere, pret_achizitie, locatie):
+def create(lst_obiecte, id_obiect: int, nume: str, descriere: str, pret_achizitie: float, locatie: str):
     """
     Adaugarea unui obiect intr-o lista noua
     :param lst_obiecte: lista de obiecte
@@ -12,26 +12,34 @@ def create(lst_obiecte,id_obiect: int, nume, descriere, pret_achizitie, locatie)
     :param locatie: locatia obiectului
     :return: o noua lista formata din lst_obiecte si noul obiect adaugat
     """
-    obiect=creeaza_obiect(id_obiect, nume, descriere, pret_achizitie, locatie)
-    #lst_obiecte.append(obiect)
+    if read(lst_obiecte, id_obiect) is not None:
+        raise ValueError(f'Exista deja un obiect cu id-ul {id_obiect}.')
+    if len(locatie) != 4:
+        raise ValueError(f'Locatia {locatie} nu are exact 4 caractere.')
+    obiect = creeaza_obiect(id_obiect, nume, descriere, pret_achizitie, locatie)
+    # lst_obiecte.append(obiect)
     return lst_obiecte + [obiect]
 
 
-def read(lst_obiecte, id_obiect: int=None):
+def read(lst_obiecte, id_obiect: int = None):
     """
     Citeste un obiect din "baza de date".
     :param lst_obiecte: lista de obiecte
     :param id_obiect: id-ul obiectului dorit
-    :return: obiectul cu id-ul dorit sau lista cu toate obiectele, daca id-ul obiectului=None
+    :return:
+    -obiectul cu id-ul dorit, daca exista
+    -lista cu toate obiectele, daca id-ul obiectului=None
+    -None, daca nu exista un obiect cu id_obiect
     """
+    if not id_obiect:
+        return lst_obiecte
     obiectul_cu_id = None
     for obiect in lst_obiecte:
         if get_id(obiect) == id_obiect:
             obiectul_cu_id = obiect
-
     if obiectul_cu_id:
         return obiectul_cu_id
-    return lst_obiecte
+    return None
 
 
 def update(lst_obiecte, new_obiect):
@@ -41,9 +49,13 @@ def update(lst_obiecte, new_obiect):
     :param obiect: obiectul care se va actualiza- id-ul trebuie sa fie existent
     :return: o lista cu obiectul actualizat.
     """
+    if read(lst_obiecte, get_id(new_obiect)) is None:
+        raise ValueError(f'Nu exista un obiect cu id-ul {get_id(new_obiect)} pe care sa il actualizam')
+    if len(get_locatie(new_obiect)) != 4:
+        raise ValueError(f'Locatia {get_locatie(new_obiect)} nu are exact 4 caractere.')
     new_obiecte = []
     for obiect in lst_obiecte:
-        if get_id(obiect)!= get_id(new_obiect):
+        if get_id(obiect) != get_id(new_obiect):
             new_obiecte.append(obiect)
         else:
             new_obiecte.append(new_obiect)
@@ -57,6 +69,8 @@ def delete(lst_obiecte, id_obiect: int):
     :param id_obiect: id-ul obiectului
     :return: o lista de obiecte fara obiectul cu id-ul id_obiect
     """
+    if read(lst_obiecte, id_obiect) is None:
+        raise ValueError(f'Nu exista un obiect cu id-ul {id_obiect} pe care sa il stergem.')
     new_obiecte = []
     for obiect in lst_obiecte:
         if get_id(obiect) != id_obiect:

@@ -1,4 +1,4 @@
-def creeaza_obiect(id_obiect: int, nume, descriere, pret_achizitie,locatie):
+def creeaza_obiect(id_obiect: int, nume, descriere, pret_achizitie, locatie):
     """
     Creeaza un obiect.
     :param id_obiect: id-ul obiectului, trebuie sa fie unic
@@ -63,4 +63,5 @@ def get_locatie(obiect):
 
 
 def get_str(obiect):
-    return f'Obiectul cu id-ul {get_id(obiect)}, aflat in locatia {get_locatie(obiect)}, pretul {get_pret(obiect)}, numele {get_nume(obiect)}, descriere {get_descriere(obiect)}'
+    return f'Obiectul cu id-ul {get_id(obiect)}, aflat in locatia {get_locatie(obiect)}, pretul {get_pret(obiect)},' \
+           f'numele {get_nume(obiect)}, descriere {get_descriere(obiect)}'
