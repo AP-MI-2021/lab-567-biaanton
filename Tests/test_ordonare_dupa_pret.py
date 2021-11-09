@@ -13,4 +13,7 @@ def get_data():
 
 def test_ordonare_dupa_pret():
     obiecte = get_data()
-    get_ordonare_dupa_pret(obiecte, [], [])
+    obiecte = get_ordonare_dupa_pret(obiecte, [], [])
+    assert obiecte[0] == get_data()[2]
+    assert obiecte[1] == get_data()[4]
+    assert obiecte[4] == get_data()[3]
