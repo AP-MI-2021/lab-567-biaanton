@@ -15,7 +15,7 @@ def test_concatenare_string_descriere():
     cuvant= "SCHIMBAT"
     obiecte = get_data()
     valoare = 50
-    new_obiecte = concatenare_string_descriere(obiecte, cuvant, valoare)
+    new_obiecte = concatenare_string_descriere(obiecte, cuvant, valoare, [], [])
     assert get_descriere(obiecte[0]) != get_descriere(new_obiecte[0])
     assert get_descriere(obiecte[4]) == get_descriere(new_obiecte[4])
     assert get_descriere(obiecte[3]) != get_descriere(new_obiecte[3])

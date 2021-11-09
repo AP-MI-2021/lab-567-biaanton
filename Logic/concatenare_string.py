@@ -1,12 +1,14 @@
 from Domain.obiect2 import get_pret, get_descriere, creeaza_obiect, get_id, get_nume, get_locatie
 
 
-def concatenare_string_descriere(lista_obiecte, cuv, valoare: float):
+def concatenare_string_descriere(lista_obiecte, cuv, valoare: float, undo_list: list, redo_list: list):
     """
     Concateneaza un string citit la descrierile obiectelor cu pretul mai mare decat o valoare citita
     :param lista_obiecte: lista din care luam obiectele
     :param cuv: string-ul pe care il concatenam descrierii unui obiect care indelineste proprietatea data
     :param valoare: valoarea pe care o comparam cu pretul de achizitie al unui obiect
+    :param undo_list: lista de undo
+    :param redo_list: lista de redo
     :return: lista cu obiectele al caror pret este mai amre decat valoare citita, iar la descriere a fost concatenat string-ul citit
     """
     new_list = []
@@ -18,6 +20,8 @@ def concatenare_string_descriere(lista_obiecte, cuv, valoare: float):
         else:
             new_list.append(creeaza_obiect(get_id(obiect), get_nume(obiect), get_descriere(obiect), get_pret(obiect),
                                            get_locatie(obiect)))
+    undo_list.append(lista_obiecte)
+    redo_list.clear()
     return new_list
 
 

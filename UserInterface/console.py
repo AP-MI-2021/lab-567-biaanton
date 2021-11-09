@@ -58,7 +58,7 @@ def handle_update(obiecte, undo_list, redo_list):
         descriere = input('Dati noua descriere a obiectului: ')
         pret_achizitie = int(input('Dati noul pret de achizitie al obiectului: '))
         locatie = input('Dati noua locatie a obiectului: ')
-        return update(obiecte, creeaza_obiect(id_obiect, nume, descriere, pret_achizitie, locatie, undo_list, redo_list))
+        return update(obiecte, creeaza_obiect(id_obiect, nume, descriere, pret_achizitie, locatie), undo_list, redo_list)
     except ValueError as ve:
         print('Eroare: ', ve)
     return obiecte
@@ -112,7 +112,7 @@ def handle_mutare_locatie(obiecte, undo_list, redo_list):
             try:
                 locatie1 = str(input('Dati locatia obiectelor pe care vreti sa le mutati'))
                 locatie2 = str(input('Dati locatia unde vreti sa fie mutate obiectele'))
-                obiecte = mutare_obiecte(obiecte, locatie1, locatie2)
+                obiecte = mutare_obiecte(obiecte, locatie1, locatie2, undo_list, redo_list)
                 print(f'Mutarea obiectelor din locatia {locatie1} in {locatie2} a fost efectuata cu succes.')
             except ValueError as ve:
                 print('Eroare: ', ve)
@@ -140,7 +140,7 @@ def handle_concatenare_string(obiecte, undo_list, redo_list):
             cuvant = str(input('Dati string-ul pe care il vom concatena la descrierea obiectelor '
                                'ce au pretul mai mare decat o valoare citita'))
             valoare = int(input('Dati valoare cu care vom compara pretul de achizitie'))
-            obiecte = concatenare_string_descriere(obiecte, cuvant, valoare)
+            obiecte = concatenare_string_descriere(obiecte, cuvant, valoare, undo_list, redo_list)
             print('Concatenarea string-ului a fost efectuata cu succes.')
         elif optiune == 'a':
             handle_show_all(obiecte)
@@ -179,7 +179,7 @@ def handle_ordonare_dupa_pret(obiecte, undo_list, redo_list):
         print('r. Revenire')
         optiune = input('Optiune aleasa: ')
         if optiune == '1':
-            obiecte = get_ordonare_dupa_pret(obiecte)
+            obiecte = get_ordonare_dupa_pret(obiecte, undo_list, redo_list)
             handle_show_all(obiecte)
         elif optiune == 'a':
             handle_show_all(obiecte)

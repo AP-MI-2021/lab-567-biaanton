@@ -72,7 +72,7 @@ def update(lst_obiecte, new_obiect, undo_list, redo_list):
     return new_obiecte
 
 
-def delete(lst_obiecte, id_obiect: int, undo_list, redo_list):
+def delete(lst_obiecte, id_obiect: int, undo_list: list, redo_list: list):
     """
     Sterge un obiect
     :param lst_obiecte: lista de obiecte

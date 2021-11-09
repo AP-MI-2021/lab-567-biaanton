@@ -15,7 +15,7 @@ def test_mutare_locatie():
         obiecte = get_data()
         locatie_veche = 'LOC4'
         locatie_noua = 'LOC1'
-        new_obiecte = mutare_obiecte(obiecte, locatie_veche, locatie_noua)
+        new_obiecte = mutare_obiecte(obiecte, locatie_veche, locatie_noua, [], [])
         assert get_locatie(obiecte[4]) != get_locatie(new_obiecte[4])
         assert get_locatie(obiecte[3]) != get_locatie(new_obiecte[3])
         assert get_locatie(obiecte[0]) == get_locatie(new_obiecte[0])

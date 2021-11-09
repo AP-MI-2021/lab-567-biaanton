@@ -2,6 +2,7 @@ from Logic.crud import create
 from Tests.test_concatenare_string import test_concatenare_string_descriere
 from Tests.test_crud import test_crud
 from Tests.test_mutare_locatie import test_mutare_locatie
+from Tests.test_ordonare_dupa_pret import test_ordonare_dupa_pret
 from Tests.test_pret_maxim_locatie import test_pret_maxim_locatie
 from Tests.test_sume_preturi_locatie import test_sume_preturi_locatie
 from Tests.test_undo_redo import test_undo_redo
@@ -38,6 +39,7 @@ if __name__ == '__main__':
     test_mutare_locatie()
     test_concatenare_string_descriere()
     test_pret_maxim_locatie()
+    test_ordonare_dupa_pret()
     test_sume_preturi_locatie()
     test_undo_redo()
     main()
