@@ -13,14 +13,14 @@ def get_data():
 
 def test_create():
     obiecte = get_data()
-    params = (20, 'onew', 'desc new', 2154.5, 'LOC4')
-    o_new = creeaza_obiect(*params)
+    params = (20, 'onew', 'desc new', 2154.5, 'LOC4', [], [])
+    o_new = creeaza_obiect(*params[:-2])
     new_obiecte = create(obiecte, *params)
     assert len(new_obiecte) == len(obiecte) + 1
     assert o_new in new_obiecte
 
     # testam daca se lanseaza exceptie pentru id duplicat
-    params2 = (20, 'scaun', 'vdfvj', 325, 'LOC2')
+    params2 = (20, 'scaun', 'vdfvj', 325, 'LOC2', [], [])
     try:
         some_o = create(new_obiecte, *params2)
         assert False
@@ -38,7 +38,7 @@ def test_read():
 def test_update():
     obiecte = get_data()
     o_updated = creeaza_obiect(1, 'new name', 'new desc', 111, 'LOC3')
-    updated = update(obiecte, o_updated)
+    updated = update(obiecte, o_updated, [], [])
     assert o_updated in updated
     assert o_updated not in obiecte
     assert len(updated) == len(obiecte)
@@ -48,7 +48,7 @@ def test_delete():
     obiecte = get_data()
     to_delete = 3
     o_deleted = read(obiecte, to_delete)
-    deleted = delete(obiecte, to_delete)
+    deleted = delete(obiecte, to_delete, [], [])
     assert o_deleted not in deleted
     assert o_deleted in obiecte
     assert len(deleted) == len(obiecte)-1

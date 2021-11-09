@@ -1,4 +1,4 @@
-def creeaza_obiect(id_obiect: int, nume, descriere, pret_achizitie,locatie):
+def creeaza_obiect(id_obiect: int, nume, descriere, pret_achizitie, locatie):
     """
     Creeaza o lista cu detaliile obiectului.
     :param id_obiect: id-ul obiectului, trebuie sa fie unic

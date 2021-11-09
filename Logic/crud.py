@@ -1,7 +1,7 @@
 from Domain.obiect2 import creeaza_obiect, get_id, get_locatie
 
 
-def create(lst_obiecte, id_obiect: int, nume: str, descriere: str, pret_achizitie: float, locatie: str):
+def create(lst_obiecte, id_obiect: int, nume: str, descriere: str, pret_achizitie: float, locatie: str, undo_list: list, redo_list: list):
     """
     Adaugarea unui obiect intr-o lista noua
     :param lst_obiecte: lista de obiecte
@@ -10,6 +10,8 @@ def create(lst_obiecte, id_obiect: int, nume: str, descriere: str, pret_achiziti
     :param descriere: descrierea obiectului
     :param pret_achizitie: pretul de achizite al obiectului
     :param locatie: locatia obiectului
+    :param undo_list: lista de obiecte
+    :param redo_list:
     :return: o noua lista formata din lst_obiecte si noul obiect adaugat
     """
     if read(lst_obiecte, id_obiect) is not None:
@@ -18,14 +20,18 @@ def create(lst_obiecte, id_obiect: int, nume: str, descriere: str, pret_achiziti
         raise ValueError(f'Locatia {locatie} nu are exact 4 caractere.')
     obiect = creeaza_obiect(id_obiect, nume, descriere, pret_achizitie, locatie)
     # lst_obiecte.append(obiect)
+    undo_list.append(lst_obiecte)
+    redo_list.clear()
     return lst_obiecte + [obiect]
 
 
-def read(lst_obiecte, id_obiect: int = None):
+def read(lst_obiecte, id_obiect: int):
     """
     Citeste un obiect din "baza de date".
     :param lst_obiecte: lista de obiecte
     :param id_obiect: id-ul obiectului dorit
+    :param undo_list:
+    :param redo_list:
     :return:
     -obiectul cu id-ul dorit, daca exista
     -lista cu toate obiectele, daca id-ul obiectului=None
@@ -42,11 +48,13 @@ def read(lst_obiecte, id_obiect: int = None):
     return None
 
 
-def update(lst_obiecte, new_obiect):
+def update(lst_obiecte, new_obiect, undo_list, redo_list):
     """
     Actualizeaza un obiect.
     :param lst_obiecte: lista de obiecte
-    :param obiect: obiectul care se va actualiza- id-ul trebuie sa fie existent
+    :param new_obiect: obiectul care se va actualiza- id-ul trebuie sa fie existent
+    :param undo_list:
+    :param redo_list:
     :return: o lista cu obiectul actualizat.
     """
     if read(lst_obiecte, get_id(new_obiect)) is None:
@@ -59,14 +67,18 @@ def update(lst_obiecte, new_obiect):
             new_obiecte.append(obiect)
         else:
             new_obiecte.append(new_obiect)
+    undo_list.append(lst_obiecte)
+    redo_list.clear()
     return new_obiecte
 
 
-def delete(lst_obiecte, id_obiect: int):
+def delete(lst_obiecte, id_obiect: int, undo_list, redo_list):
     """
     Sterge un obiect
     :param lst_obiecte: lista de obiecte
     :param id_obiect: id-ul obiectului
+    :param undo_list:
+    :param redo_list:
     :return: o lista de obiecte fara obiectul cu id-ul id_obiect
     """
     if read(lst_obiecte, id_obiect) is None:
@@ -75,7 +87,8 @@ def delete(lst_obiecte, id_obiect: int):
     for obiect in lst_obiecte:
         if get_id(obiect) != id_obiect:
             new_obiecte.append(obiect)
-
+    undo_list.append(lst_obiecte)
+    redo_list.clear()
     return new_obiecte
 
 
