@@ -17,7 +17,7 @@ def show_menu():
     print('6. Afisarea sumelor preturilor pentru fiecare locatie')
     print('u. Undo')
     print('r. Redo')
-    print('x. Exit')
+    print('x. Revenire la meniuri')
 
 
 def handle_add(obiecte, undo_list, redo_list):
